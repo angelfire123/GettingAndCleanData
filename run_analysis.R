@@ -6,86 +6,6 @@
 
 library("reshape2")
 
-#mean and standard deviations are columns
-#1 tBodyAcc-mean()-X
-#2 tBodyAcc-mean()-Y
-#3 tBodyAcc-mean()-Z
-#4 tBodyAcc-std()-X
-#5 tBodyAcc-std()-Y
-#6 tBodyAcc-std()-Z
-#41 tGravityAcc-mean()-X
-#42 tGravityAcc-mean()-Y
-#43 tGravityAcc-mean()-Z
-#44 tGravityAcc-std()-X
-#45 tGravityAcc-std()-Y
-#46 tGravityAcc-std()-Z
-#81 tBodyAccJerk-mean()-X
-#82 tBodyAccJerk-mean()-Y
-#83 tBodyAccJerk-mean()-Z
-#84 tBodyAccJerk-std()-X
-#85 tBodyAccJerk-std()-Y
-#86 tBodyAccJerk-std()-Z
-#121 tBodyGyro-mean()-X
-#122 tBodyGyro-mean()-Y
-#123 tBodyGyro-mean()-Z
-#124 tBodyGyro-std()-X
-#125 tBodyGyro-std()-Y
-#126 tBodyGyro-std()-Z
-#161 tBodyGyroJerk-mean()-X
-#162 tBodyGyroJerk-mean()-Y
-#163 tBodyGyroJerk-mean()-Z
-#164 tBodyGyroJerk-std()-X
-#165 tBodyGyroJerk-std()-Y
-#166 tBodyGyroJerk-std()-Z
-#201 tBodyAccMag-mean()
-#202 tBodyAccMag-std()
-#214 tGravityAccMag-mean()
-#215 tGravityAccMag-std()
-#227 tBodyAccJerkMag-mean()
-#228 tBodyAccJerkMag-std()
-#240 tBodyGyroMag-mean()
-#241 tBodyGyroMag-std()
-#253 tBodyGyroJerkMag-mean()
-#254 tBodyGyroJerkMag-std()
-#266 fBodyAcc-mean()-X
-#267 fBodyAcc-mean()-Y
-#268 fBodyAcc-mean()-Z
-#269 fBodyAcc-std()-X
-#270 fBodyAcc-std()-Y
-#271 fBodyAcc-std()-Z
-#294 fBodyAcc-meanFreq()-X
-#295 fBodyAcc-meanFreq()-Y
-#296 fBodyAcc-meanFreq()-Z
-#345 fBodyAccJerk-mean()-X
-#346 fBodyAccJerk-mean()-Y
-#347 fBodyAccJerk-mean()-Z
-#348 fBodyAccJerk-std()-X
-#349 fBodyAccJerk-std()-Y
-#350 fBodyAccJerk-std()-Z
-#373 fBodyAccJerk-meanFreq()-X
-#374 fBodyAccJerk-meanFreq()-Y
-#375 fBodyAccJerk-meanFreq()-Z
-#424 fBodyGyro-mean()-X
-#425 fBodyGyro-mean()-Y
-#426 fBodyGyro-mean()-Z
-#427 fBodyGyro-std()-X
-#428 fBodyGyro-std()-Y
-#429 fBodyGyro-std()-Z
-#452 fBodyGyro-meanFreq()-X
-#453 fBodyGyro-meanFreq()-Y
-#454 fBodyGyro-meanFreq()-Z
-#503 fBodyAccMag-mean()
-#504 fBodyAccMag-std()
-#513 fBodyAccMag-meanFreq()
-#516 fBodyBodyAccJerkMag-mean()
-#517 fBodyBodyAccJerkMag-std()
-#526 fBodyBodyAccJerkMag-meanFreq()
-#529 fBodyBodyGyroMag-mean()
-#530 fBodyBodyGyroMag-std()
-#539 fBodyBodyGyroMag-meanFreq()
-#542 fBodyBodyGyroJerkMag-mean()
-#543 fBodyBodyGyroJerkMag-std()
-#552 fBodyBodyGyroJerkMag-meanFreq()
 
 #define the columns indexes
 newIndex <- 3 # 1 is subject; 2 is volunteer id; 3 is activity and 4 starts the X_{train,test} files
@@ -169,7 +89,7 @@ fBodyBodyGyroJerkMagMean <- newIndex + 542
 fBodyBodyGyroJerkMagStd <- newIndex + 543
 fBodyBodyGyroJerkMagMeanFreq <- newIndex + 552 
 
-
+# load test data
 myMatrixSubjectXYTest <- cbind(c('test'), read.table("C:/R_workspace2/Getting_and_Cleaning_Data/UCI HAR Dataset/test/subject_test.txt", header=FALSE))
 myMatrixSubjectXYTest <- cbind(myMatrixSubjectXYTest, read.table("C:/R_workspace2/Getting_and_Cleaning_Data/UCI HAR Dataset/test/y_test.txt", header=FALSE))
 myMatrixSubjectXYTest <- cbind(myMatrixSubjectXYTest, read.table("C:/R_workspace2/Getting_and_Cleaning_Data/UCI HAR Dataset/test/X_test.txt", header=FALSE))
@@ -184,13 +104,13 @@ myMatrixSubjectXYTest <- cbind(myMatrixSubjectXYTest, read.table("C:/R_workspace
 myMatrixSubjectXYTest <- cbind(myMatrixSubjectXYTest, read.table("C:/R_workspace2/Getting_and_Cleaning_Data/UCI HAR Dataset/test/Inertial Signals/total_acc_z_test.txt", header=FALSE))
 
 
-# setting the column names:
+# setting the column names for test data:
 names(myMatrixSubjectXYTest)[1]<-"subject"
 names(myMatrixSubjectXYTest)[2]<-"volunteer"
 names(myMatrixSubjectXYTest)[3]<-"activity"
 
 
-
+# load train data
 myMatrixSubjectXYTrain <- cbind(c('train'), read.table("C:/R_workspace2/Getting_and_Cleaning_Data/UCI HAR Dataset/train/subject_train.txt", header=FALSE))
 myMatrixSubjectXYTrain <- cbind(myMatrixSubjectXYTrain, read.table("C:/R_workspace2/Getting_and_Cleaning_Data/UCI HAR Dataset/train/y_train.txt", header=FALSE))
 myMatrixSubjectXYTrain <- cbind(myMatrixSubjectXYTrain, read.table("C:/R_workspace2/Getting_and_Cleaning_Data/UCI HAR Dataset/train/X_train.txt", header=FALSE))
@@ -204,13 +124,13 @@ myMatrixSubjectXYTrain <- cbind(myMatrixSubjectXYTrain, read.table("C:/R_workspa
 myMatrixSubjectXYTrain <- cbind(myMatrixSubjectXYTrain, read.table("C:/R_workspace2/Getting_and_Cleaning_Data/UCI HAR Dataset/train/Inertial Signals/total_acc_y_train.txt", header=FALSE))
 myMatrixSubjectXYTrain <- cbind(myMatrixSubjectXYTrain, read.table("C:/R_workspace2/Getting_and_Cleaning_Data/UCI HAR Dataset/train/Inertial Signals/total_acc_z_train.txt", header=FALSE))
 
-# setting the column names:
+# setting the column names for train data:
 names(myMatrixSubjectXYTrain)[1]<-"subject"
 names(myMatrixSubjectXYTrain)[2]<-"volunteer"
 names(myMatrixSubjectXYTrain)[3]<-"activity"
 
 
-
+# concatenate the two matrices into one single matrix
 myCompleteMatrixXY <- rbind (myMatrixSubjectXYTest, myMatrixSubjectXYTrain)
 names(myCompleteMatrixXY)[1]<-"subject"
 names(myCompleteMatrixXY)[2]<-"volunteer"
